@@ -262,7 +262,7 @@ function FormTrabajo({ user, nombreUsuario }) {
       };
       await addDoc(collection(db, "trabajos"), trabajoData);
       try {
-        await fetch("/api/sync-sheet", {
+        await fetch(window.location.origin + "/api/sync-sheet", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
