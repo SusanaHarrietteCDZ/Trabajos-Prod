@@ -147,9 +147,10 @@ function Login() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: `radial-gradient(ellipse at center, #1a0800 0%, ${C.bg} 70%)` }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: `radial-gradient(ellipse at center, #1a0800 0%, ${C.bg} 70%)` }}>
       <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
       <div style={{ ...card, width: "min(90vw,380px)", padding: 40, textAlign: "center" }}>
+        <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: C.gold, fontWeight: 500, letterSpacing: 1.5, marginBottom: 20 }}>Registro de Trabajos de Producción</div>
         <img src="/logo-cdz.png" alt="CDZ" style={{ width: 64, height: 64, marginBottom: 6, filter: "invert(1)", mixBlendMode: "screen" }} />
         <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 30, color: C.gold, fontWeight: 700, letterSpacing: 2 }}>CDZ</div>
         <div style={{ fontSize: 11, color: C.textMuted, letterSpacing: 4, textTransform: "uppercase", marginBottom: 32 }}>Bodega</div>
@@ -244,7 +245,7 @@ function FormTrabajo({ user, nombreUsuario }) {
     }
     setSaving(true);
     try {
-      await addDoc(collection(db, "trabajos"), {
+      const trabajoData = {
         usuarioEmail: user.email,
         nombreUsuario,
         fecha: form.fecha,
@@ -258,7 +259,28 @@ function FormTrabajo({ user, nombreUsuario }) {
         observaciones: form.observaciones,
         imagenes: form.imagenes,
         createdAt: serverTimestamp(),
-      });
+      };
+      await addDoc(collection(db, "trabajos"), trabajoData);
+      try {
+        await fetch("/api/sync-sheet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fecha: form.fecha,
+            nombreUsuario,
+            trabajoRealizado: form.trabajoRealizado,
+            variedad: form.variedad,
+            traslado: form.traslado,
+            deTanque: form.traslado === "Sí" ? form.deTanque : "",
+            aTanque: form.traslado === "Sí" ? form.aTanque : "",
+            tanque: form.traslado === "No" ? form.tanque : "",
+            litrosTanqueFinal: form.litrosTanqueFinal,
+            observaciones: form.observaciones,
+          }),
+        });
+      } catch (sheetErr) {
+        console.warn("No se pudo sincronizar con Google Sheets:", sheetErr);
+      }
       setSaved(true);
       setForm(empty());
       setTimeout(() => setSaved(false), 4000);
