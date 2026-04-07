@@ -472,9 +472,13 @@ function PanelRegistros({ user, nombreUsuario }) {
   const [detalle, setDetalle] = useState(null);
 
   useEffect(() => {
-    const q = query(collection(db, "trabajos"), where("usuarioEmail", "==", user.email), orderBy("createdAt", "desc"));
+    const q = query(collection(db, "trabajos"), where("usuarioEmail", "==", user.email));
     return onSnapshot(q, snap => {
-      setTrabajos(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      docs.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+      setTrabajos(docs);
+    }, (error) => {
+      console.error("Error loading registros:", error);
     });
   }, [user.email]);
 
