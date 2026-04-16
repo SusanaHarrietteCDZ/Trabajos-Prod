@@ -70,6 +70,14 @@ const TANQUES = [
   "Tanque 20", "Tanque 21", "Tanque 22", "Tanque 23", "Tanque 24",
   "Tanque 25", "Tanque 26", "Tanque 27", "Tanque 28", "Tanque 29",
   "Tanque 30", "Tanque 31", "Tanque 32",
+  "Barrica 25001",
+  "Barrica 25002",
+  "Barrica 25003",
+  "Barrica 25004",
+  "Barrica 25005",
+  "Barrica 25006",
+  "Barrica 25007",
+  "Barrica 25008",
 ];
 
 const C = {
