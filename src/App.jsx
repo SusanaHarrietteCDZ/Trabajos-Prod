@@ -60,6 +60,12 @@ const VARIEDADES = [
   "Cabernet Sauvignon",
   "Chenin/Sauvignon",
   "Sangría",
+  "Corte Porfiado Blend",
+  "Corte Porfiado Franc",
+  "Corte CDZ Pettit Verdot",
+  "Corte CDZ Blend",
+  "Corte CDZ Cabernet Sau. (Innovacion)",
+  "Corte Rose(Innovacion)",
 ];
 
 const TANQUES = [
@@ -70,14 +76,6 @@ const TANQUES = [
   "Tanque 20", "Tanque 21", "Tanque 22", "Tanque 23", "Tanque 24",
   "Tanque 25", "Tanque 26", "Tanque 27", "Tanque 28", "Tanque 29",
   "Tanque 30", "Tanque 31", "Tanque 32",
-  "Barrica 25001",
-  "Barrica 25002",
-  "Barrica 25003",
-  "Barrica 25004",
-  "Barrica 25005",
-  "Barrica 25006",
-  "Barrica 25007",
-  "Barrica 25008",
 ];
 
 const C = {
@@ -446,12 +444,12 @@ function FormTrabajo({ user, nombreUsuario }) {
                 style={{ ...inp, minHeight: 70, resize: "vertical" }}
                 value={form.observaciones}
                 onChange={e => {
-                  if (e.target.value.length <= 100) set("observaciones", e.target.value);
+                  if (e.target.value.length <= 244) set("observaciones", e.target.value);
                 }}
                 placeholder="Observaciones adicionales..."
-                maxLength={100}
+                maxLength={244}
               />
-              <div style={{ fontSize: 10, color: C.textMuted, textAlign: "right", marginTop: 4 }}>{form.observaciones.length}/100</div>
+              <div style={{ fontSize: 10, color: C.textMuted, textAlign: "right", marginTop: 4 }}>{form.observaciones.length}/244</div>
             </div>
           </div>
 
