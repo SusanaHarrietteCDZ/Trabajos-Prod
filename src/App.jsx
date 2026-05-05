@@ -60,6 +60,12 @@ const VARIEDADES = [
   "Cabernet Sauvignon",
   "Chenin/Sauvignon",
   "Sangría",
+  "Corte Porfiado Blend",
+  "Corte Porfiado Franc",
+  "Corte CDZ Pettit Verdot",
+  "Corte CDZ Blend",
+  "Corte CDZ Cabernet Sau. (Innovacion)",
+  "Corte Rose(Innovacion)",
 ];
 
 const TANQUES = [
@@ -446,12 +452,12 @@ function FormTrabajo({ user, nombreUsuario }) {
                 style={{ ...inp, minHeight: 70, resize: "vertical" }}
                 value={form.observaciones}
                 onChange={e => {
-                  if (e.target.value.length <= 100) set("observaciones", e.target.value);
+                  if (e.target.value.length <= 244) set("observaciones", e.target.value);
                 }}
                 placeholder="Observaciones adicionales..."
-                maxLength={100}
+                maxLength={244}
               />
-              <div style={{ fontSize: 10, color: C.textMuted, textAlign: "right", marginTop: 4 }}>{form.observaciones.length}/100</div>
+              <div style={{ fontSize: 10, color: C.textMuted, textAlign: "right", marginTop: 4 }}>{form.observaciones.length}/244</div>
             </div>
           </div>
 
