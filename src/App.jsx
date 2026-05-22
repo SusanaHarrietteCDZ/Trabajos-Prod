@@ -50,6 +50,7 @@ const TRABAJOS_REALIZADOS = [
   "Filtrado",
   "Embotellado",
   "Traslado",
+  "Rellenado",
 ];
 
 const VARIEDADES = [
